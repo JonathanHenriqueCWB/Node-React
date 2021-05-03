@@ -47,3 +47,16 @@ INSERT INTO usuarios( nome, email, idade ) VALUES (
 /*Selecionando por nome de coluna*/
     SELECT * FROM usuarios WHERE nome = 'Yosh'
 /* Trará somente o usuario de nome Yosh */
+
+/*Deletando registros de uma tabela*/
+    DELETE FROM usuarios
+/*Cuidado esse comando irá deletar todos os registros da tabela*/
+
+/*Deletando com where*/
+    DELETE FROM usuarios WHERE nome = 'Mario'
+/*Ira deletar somente o usuario selecionado*/
+
+/*Atualizando um registro na banco de dadaos*/
+    UPDATE usuarios SET nome = 'Super Mario' WHERE nome = 'Mario'
+    UPDATE usuarios SET nome = 'Super Mario', email= 'SuperMario@email.com' WHERE nome = 'Mario'
+/*Pode ser alterado mais de um campo por vez*/
