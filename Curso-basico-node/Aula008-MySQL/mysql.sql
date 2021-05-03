@@ -60,3 +60,7 @@ INSERT INTO usuarios( nome, email, idade ) VALUES (
     UPDATE usuarios SET nome = 'Super Mario' WHERE nome = 'Mario'
     UPDATE usuarios SET nome = 'Super Mario', email= 'SuperMario@email.com' WHERE nome = 'Mario'
 /*Pode ser alterado mais de um campo por vez*/
+
+/*Exibir estrutura de uma tabela (campos)*/
+    DESCRIBE nomeTabela
+/*Irá mostrar os campos da tabela*/
