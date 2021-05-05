@@ -22,6 +22,10 @@ app.get('/cad', function(req, res){
     res.render('formulario')
 })
 
+app.post('/addPost', function(req, res) {
+    res.send('Formulario recebido com sucesso!')
+})
+
 /**##############################<<< SERVIDOR >>>######################################*/
 
 app.listen(8080, function(){
