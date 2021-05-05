@@ -10,6 +10,9 @@ const handlebars = require('express-handlebars') // Template engine
     // Template Engine
     app.engine('handlebars', handlebars({defaultLayout: 'main'}))
     app.set('view engine', 'handlebars')
+    // Nova versão do express não precisa do body-parser!
+    app.use(express.urlencoded({extended: false}))
+    app.use(express.json())
     // Conexão com banco de dados MySql
     const sequelize = new Sequelize('meu_blog', 'root', 'root', {
         host: 'localhost',
@@ -23,7 +26,7 @@ app.get('/cad', function(req, res){
 })
 
 app.post('/addPost', function(req, res) {
-    res.send('Formulario recebido com sucesso!')
+    res.send("Titulo: " + req.body.titulo + " Conteudo: " + req.body.conteudo)
 })
 
 /**##############################<<< SERVIDOR >>>######################################*/
