@@ -18,8 +18,8 @@ const handlebars = require('express-handlebars') // Template engine
 
 /**##############################<<< ROTAS >>>#########################################*/
 
-app.get('/', function(req, res){
-    res.send('Home Page - Welcome!')
+app.get('/cad', function(req, res){
+    res.render('formulario')
 })
 
 /**##############################<<< SERVIDOR >>>######################################*/
