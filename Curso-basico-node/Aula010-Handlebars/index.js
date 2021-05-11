@@ -6,18 +6,19 @@ const Post = require('./models/Post')
 // Confi handlebaras template engine
 app.engine('handlebars', handlebars({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+
 // Confi body-parser
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
-// Rotas cadastrar
-
-// Rota Home
-app.get('/', function(req, res){
-    res.render('home')
+// ROTAS
+app.get('/', function (req, res) {
+    Post.findAll({order: [['id', 'DESC']]}).then(function (posts) {
+        // console.log(posts)
+        res.render('home', { posts: posts })
+    })
 })
 
-// Rota de cadastro
 app.get('/cadastrar', function (req, res) {
     res.render('formulario')
 })
