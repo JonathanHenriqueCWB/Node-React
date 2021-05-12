@@ -34,6 +34,14 @@ app.post('/cadastrar', function (req, res) {
     })
 })
 
+app.get('/deletar/:id', function(req, res){
+    Post.destroy({where: {'id': req.params.id}}).then(function(){
+        res.send('Registro deletado com sucesso!')
+    }).catch(function(erro){
+        res.send('Erro ao apagar o registro!' + erro)
+    })
+})
+
 // Servidor express
 app.listen(8080, function () {
     console.log('Server is runnig on port 8080')
@@ -46,7 +54,7 @@ app.listen(8080, function () {
  * handlebars é um template engine, serve para usar estruturas no html, tais como,
  * condicionais, repeticão e principalmente exibir dados que viram do backend no
  * frontend.
- * npm install --save express-hundlebars
+ * npm install --save express-handlebars
  *
  * Sequelize é um ORM Object Relational Model, para banco de dados relacionais, tais como, PostgressSQL, MariaDB, SQLite e MySQL
  * npm install --save sequelize
