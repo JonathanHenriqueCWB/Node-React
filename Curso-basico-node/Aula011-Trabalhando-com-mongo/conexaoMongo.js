@@ -2,7 +2,7 @@
 const mongoose = require('mongoose')
 
 // Configurando conexão com MongoDB
-mongoose.connect("mongodb://localhost/nomeBanco").then(() => {
+mongoose.connect("mongodb://localhost/nomeBanco", { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
     console.log('Conectado com sucesso!')
 }).catch(err => {
     console.log('Erro ao conectar-se!' + err)
@@ -28,26 +28,27 @@ const UserSchema = mongoose.Schema({
     }
 })
 
-// Collection
-mongoose.model('users', UserSchema)
+// Cria uma nova collection
+const User = mongoose.model('users', UserSchema)
 
-// Definir um usuario
-const Mario = mongoose.model('users')
-new Mario({
-    nome: 'Super Mario',
+// Cadastrando um usuario na nova collection
+const Luigi = new User({
+    nome: 'Luigi',
     sobrenome: 'Bross',
-    email: 'Supermario@email.com',
-    idade: 29
-}).save().then(() => {
-    console.log('Usuario criado com sucesso!')
+    email: 'Luigi@email.com',
+    idade: 25
+})
+
+Luigi.save().then(() => {
+    console.log('Usuario cadastrado com sucesso!')
 }).catch(err => {
-    console.log('Erro ao criar usuario!' + err)
+    console.log('Erro ao cadastrar usuario!' + err)
 })
 
 /**
     1 - Instalar e importar o mongoose npm install --save mongoose
     2 - Configurar a string de conexao
     3 - Definir ou importar a model que servirá com base de criação da collection
-    4 - Definir a collection
-    5 - Cadastrar usuario
+    4 - Criar nova collection
+    5 - Cadastrar usuario na collection
  */
