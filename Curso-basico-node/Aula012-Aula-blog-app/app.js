@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const handlebars = require('express-handlebars')
 const mongoose = require('mongoose')
+const admin = require('./routes/admin')
 
 // Configurações
     // Body-parser
@@ -11,11 +12,10 @@ const mongoose = require('mongoose')
     // Handlebars
         app.enabled('handlebars', handlebars({defaultLayout: 'main'}))
         app.set('view engine' , 'handlebars')
+    // Mongosse
 
 // Rotas
-    app.get('/', (req, res) => {
-        res.send('Home page - página principal')
-    })
+    app.use('/admin', admin)
 
 // Outros
     const port = 8080
