@@ -14,6 +14,11 @@ const path = require('path')
         app.engine('handlebars', handlebars({defaultLayout: 'main'}))
         app.set('view engine' , 'handlebars')
     // Mongosse
+        mongoose.connect('mongodb://localhost/blogapp', {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
+            console.log('Conectado ao banco de dados com sucesso!')
+        }).catch((err) => {
+            console.log('Erro ao conectar ao banco de dados' + err )
+        })
     // Public
         app.use(express.static(path.join(__dirname,"public")))
 
