@@ -14,7 +14,7 @@ router.get('/posts', (req, res) => {
 
 router.get('/categorias', (req, res) => {
 
-    Categoria.find().lean().then(categorias => {
+    Categoria.find().lean().sort({ date: 'desc' }).then(categorias => {
         res.render('admin/categorias', { categorias: categorias })
     }).catch(err => {
         req.flash("error_msg", "Erro ao listar categorias")
@@ -60,6 +60,37 @@ router.post('/categorias/nova', (req, res) => {
             res.redirect('/admin')
         })
     }
+})
+
+router.get('/categorias/edit/:id', (req, res) => {
+    Categoria.findOne({ _id: req.params.id }).lean().then(categoria => {
+        res.render("admin/editCategoria", { categoria: categoria })
+    }).catch(err => {
+        req.flash('error_msg', "categoria nao existe")
+        res.redirect("/admin/categorias")
+    })
+})
+
+router.post('/categorias/edit', (req, res) => {
+
+    Categoria.findOne({ _id: req.body.id }).then(categoria => {
+
+        categoria.nome = req.body.nome
+        categoria.slug = req.body.slug
+
+        categoria.save().then(() => {
+            req.flash('success_msg', "Registro alterado com sucesso!")
+            res.redirect("/admin/categorias")
+        }).catch(err => {
+            req.flash('error_msg', "Erro interno ao salvar edição")
+            res.redirect("/admin/categorias")
+        })
+        
+    }).catch(err => {
+        req.flash("error_msg", "Erro ao editar a categoria")
+        res.redirect("/admin/categorias")
+    })
+
 })
 
 module.exports = router
