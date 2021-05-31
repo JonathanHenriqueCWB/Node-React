@@ -17,4 +17,4 @@ const CategorySchema = new Schema({
     }
 })
 
-const Categoria = mongoose.model('categorias', Categoria)
+const Categoria = mongoose.model('categorias', CategorySchema)
