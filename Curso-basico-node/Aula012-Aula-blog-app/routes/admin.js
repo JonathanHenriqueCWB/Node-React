@@ -22,18 +22,37 @@ router.get('/categorias/add', (req, res) => {
 
 router.post('/categorias/nova', (req, res) => {
 
-    // Recebe do formulario o nome e slug para salvar no banco
-    const novaCategoria = {
-        nome: req.body.nome,
-        slug: req.body.slug
+    // Validações formulario
+    var erros = []
+
+    if (!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null) {
+        erros.push({ texto: 'Nome invalido' })
+    }
+    if (!req.body.slug || typeof req.body.slug == undefined || req.body.slug == null) {
+        erros.push({ texto: "Slug invalido" })
+    }
+    if (req.body.nome.length < 2) {
+        erros.push({ texto: "Nome da categoria muito pequeno" })
     }
 
-    // Cria nova categoria
-    new Categoria(novaCategoria).save().then(()=> {
-        console.log('Categoria salva com sucesso')
-    }).catch(err => {
-        console.log('Erro ao salvar nova categoria!!')
-    })
+    if (erros.length > 0) {
+        res.render("admin/addCategorias", { erros: erros })
+    } else {
+        // Recebe do formulario o nome e slug para salvar no banco
+        const novaCategoria = {
+            nome: req.body.nome,
+            slug: req.body.slug
+        }
+
+        // Cria nova categoria
+        new Categoria(novaCategoria).save().then(() => {
+            req.flash("success_msg", "categoria criada com sucesso")
+            res.redirect('/admin/categorias')
+        }).catch(err => {
+            req.flash("error_msg", "Erro ao criar categoria")
+            res.redirect('/admin')
+        })
+    }
 })
 
 module.exports = router
