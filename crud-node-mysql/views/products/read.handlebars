@@ -1,0 +1,10 @@
+<h1>Página de listagem de produtos</h1>
+<hr>
+
+{{#each produtos}}
+    <h3>{{dataValues.name}}</h3>
+    <p>{{dataValues.description}}</p>
+    <button><a href="products/update">UPDATE</a></button>
+    <button><a href="products/delete/{{dataValues.id}}">DELETE</a></button>
+    <hr>
+{{/each}}
