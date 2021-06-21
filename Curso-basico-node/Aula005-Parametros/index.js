@@ -5,8 +5,7 @@ app.get("/", function (req, res) {
     res.send('Home Page - Trabalhando com parâmetros')
 })
 
-// Basta add o parametro com /:NomeParametro
-// Pode ser passado mais de uma parametro
+// Exemplo de rota com dois parametros
 app.get('/ola/:nome/:sobrenome', function (req, res) {
     res.send(req.params)
     //res.send("Ola " + req.params.nome)

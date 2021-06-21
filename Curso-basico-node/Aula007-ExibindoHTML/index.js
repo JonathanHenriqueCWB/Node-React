@@ -2,11 +2,11 @@ const express = require('express')
 const app = express()
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/index.html')
+    res.sendFile(__dirname + '/html/index.html')
 })
 
 app.get('/sobre', function (req, res) {
-    res.sendFile(__dirname + '/sobre/sobre.html')
+    res.sendFile(__dirname + '/html/sobre/sobre.html')
 })
 
 app.listen(8080, function () {

@@ -3,7 +3,7 @@ const http = require('http')
 
 // criando um servidor
 http.createServer(function(req, res){
-    res.end("Criando um servidor HTTP com Node!")
+    res.end("Criando um servidor HTTP com Node! (sem express)")
 }).listen(8080)
 
 console.log('Server is running on port 8080')
